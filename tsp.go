@@ -60,8 +60,8 @@ func main() {
 		if *runIntAvgOf != 0{
 			avg := 0.0
 			for i:=0;i<*runIntAvgOf;i++{
-				pso := swarm.NewAntCycle(5,20,0.001,15,20,0.1,0.1,list)
-				pso.SetLog(false)
+				pso := swarm.NewAntCycle(*runIntIteration,*runIntColonySize,*runFloatEvap,*runFloatAlpha,*runFloatBeta,*runFloatInitPherom,*runFloatInitQ,list)
+				pso.SetLog(*runBoolSetLog)
 				pso.Process()
 				avg += pso.BestAnt.TotalCost
 				fmt.Printf("best cost %v %v \n",pso.BestAnt.TotalCost , pso.BestAnt.GetPath())
@@ -78,6 +78,7 @@ func main() {
 		elapsed := time.Since(start)
 		fmt.Printf("Ant System took %s", elapsed)
 	} else{
-
+		runCommand.PrintDefaults()
+		os.Exit(1)
 	}
 }
